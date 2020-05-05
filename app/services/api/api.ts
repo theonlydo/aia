@@ -75,12 +75,11 @@ export class Api {
   }
 
   /**
-   * Gets a single user by ID
+   * Gets a list of users.
    */
-
-  async getUser(id: string): Promise<Types.GetUserResult> {
+  async getFeed(tag = null): Promise<Types.GetUsersResult> {
     // make the api call
-    const response: ApiResponse<any> = await this.apisauce.get(`/users/${id}`)
+    const response: ApiResponse<any> = await this.apisauce.get(`/services/feeds/photos_public.gne`)
 
     // the typical ways to die when calling an api
     if (!response.ok) {
@@ -88,15 +87,21 @@ export class Api {
       if (problem) return problem
     }
 
+    const convertUser = raw => {
+      return {
+        id: raw.id,
+        name: raw.name,
+      }
+    }
+
     // transform the data into the format we are expecting
     try {
-      const resultUser: Types.User = {
-        id: response.data.id,
-        name: response.data.name,
-      }
-      return { kind: "ok", user: resultUser }
+      const rawUsers = response.data
+      const resultUsers: Types.User[] = rawUsers.map(convertUser)
+      return { kind: "ok", users: resultUsers }
     } catch {
       return { kind: "bad-data" }
     }
   }
+
 }
