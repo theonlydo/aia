@@ -1,3 +1,4 @@
+require("../app/components/feed-placeholder/feed-placeholder.story")
 require("../app/components/image-post/image-post.story")
 require("../app/components/text/text.story")
 require("../app/components/button/button.story")
