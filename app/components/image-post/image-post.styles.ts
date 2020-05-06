@@ -24,9 +24,16 @@ export const imagePostStyles = {
     backgroundColor: color.grey
   } as ViewStyle,
 
-  DETAIL: {
+  TITLE: {
     marginHorizontal: spacing[4],
-    marginVertical: spacing[3]
+    marginVertical: spacing[3],
+    flexDirection:'row'
+
+  } as ViewStyle,
+
+  BOTTOM: {
+    marginHorizontal: spacing[4],
+    marginVertical: spacing[3],
   } as ViewStyle,
 
 

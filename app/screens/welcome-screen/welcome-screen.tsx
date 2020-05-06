@@ -49,11 +49,10 @@ export const WelcomeScreen: React.FunctionComponent<WelcomeScreenProps> = props 
   return (
     <View style={FULL}>
       <SearchBar
-        placeholder="Search tag image here"
+        placeholder="Search image by tag here"
         onBlur={() => getData()}
         onChangeText={(t) => setTag(t)}
         value={tag}
-        onKeyPress={() => console.log("ya")}
         lightTheme style={{ marginBottom: spacing[4] }} />
 
       {loading ? <FeedPlaceholder /> : renderList()}
