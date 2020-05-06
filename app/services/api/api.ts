@@ -3,6 +3,7 @@ import { getGeneralApiProblem } from "./api-problem"
 import { ApiConfig, DEFAULT_API_CONFIG } from "./api-config"
 import * as Types from "./api.types"
 import { GET } from "../../constants/urls"
+import { ImageSnapshot } from "../../models/image"
 
 /**
  * Manages all requests to the API.
@@ -49,15 +50,15 @@ export class Api {
   /**
    * Get feed list
    */
-  async getFeed(tag = null): Promise<Types.GetUsersResult> {
+  async getFeed(tag = null): Promise<Types.FeedResult> {
     // make the api call
     var data = {
-      tag: tag,
-      format: 'json'
+      tags: tag,
+      format: 'json',
+      nojsoncallback: 1
     }
 
     const response: ApiResponse<any> = await this.apisauce.get(GET.FEED, data)
-    console.log(response.data)
 
     // the typical ways to die when calling an api
     if (!response.ok) {
@@ -65,11 +66,10 @@ export class Api {
       if (problem) return problem
     }
 
-
     // transform the data into the format we are expecting
     try {
-      const rawUsers = response.data
-      return { kind: "ok", users: rawUsers }
+      const convertedData: ImageSnapshot[] = response.data.items
+      return { kind: "ok", data: convertedData }
     } catch {
       return { kind: "bad-data" }
     }

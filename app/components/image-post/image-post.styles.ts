@@ -1,9 +1,17 @@
 import { ViewStyle } from "react-native"
-import { color } from "../../theme"
+import { color, spacing } from "../../theme"
+import { UI } from "../../constants/ui"
 
 export const imagePostStyles = {
   WRAPPER: {
     justifyContent: 'center',
-    backgroundColor:color.error
+    marginBottom: spacing[4]
+  } as ViewStyle,
+
+  IMG: {
+    height: UI.IMG_HEIGHT,
+    width: UI.IMG_WIDTH,
+    backgroundColor: color.grey
   } as ViewStyle
+
 }
