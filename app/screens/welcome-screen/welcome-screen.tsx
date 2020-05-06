@@ -54,7 +54,7 @@ export const WelcomeScreen: React.FunctionComponent<WelcomeScreenProps> = props 
 
   function noInternetView() {
     return (
-      <View style={{marginTop:spacing[3]}}><Text>No Internet Connection</Text></View>
+      <View style={{flex:1, alignItems:'center', justifyContent:"center"}}><Text>No Internet Connection</Text></View>
     )
   }
 
