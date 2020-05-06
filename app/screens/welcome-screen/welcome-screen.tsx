@@ -1,5 +1,5 @@
 import * as React from "react"
-import { View, ViewStyle, FlatList } from "react-native"
+import { View, ViewStyle, FlatList, RefreshControl } from "react-native"
 import { ParamListBase } from "@react-navigation/native"
 import { NativeStackNavigationProp } from "react-native-screens/native-stack"
 import { Screen, FeedPlaceholder } from "../../components"
@@ -16,6 +16,7 @@ export interface WelcomeScreenProps {
 export const WelcomeScreen: React.FunctionComponent<WelcomeScreenProps> = props => {
 
   const [loading, setLoading] = React.useState(true)
+  const [refreshing, ] = React.useState(false)
   const [data, setData] = React.useState([])
   const [tag, setTag] = React.useState(null)
 
@@ -36,6 +37,9 @@ export const WelcomeScreen: React.FunctionComponent<WelcomeScreenProps> = props 
 
   function renderList() {
     return <FlatList
+    refreshControl={
+      <RefreshControl refreshing={refreshing} onRefresh={() => { getData() }} />
+    }
       data={data}
       renderItem={({ item }) => <ImagePost data={item}/>}
       keyExtractor={item => item.link}

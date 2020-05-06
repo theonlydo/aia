@@ -2,7 +2,6 @@ import * as React from "react"
 import { View, Image } from "react-native"
 import { useObserver } from "mobx-react-lite"
 import { Text } from "../"
-import { useStores } from "../../models/root-store"
 import { imagePostStyles as styles } from "./image-post.styles"
 import { getLocalTime } from "../../utils/date"
 
@@ -31,9 +30,7 @@ export const ImagePost: React.FunctionComponent<ImagePostProps> = props => {
       <Image
         source={{ uri: media.m }}
         style={styles.IMG}
-        resizeMode={"contain"}
-
-      />
+        resizeMode={"contain"} />
       <View style={styles.DETAIL}>
         <Text>{title}</Text>
       </View>
