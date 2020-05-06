@@ -8,7 +8,7 @@ import { ImagePost } from "../../components/image-post/image-post"
 import { SearchBar } from 'react-native-elements';
 import { Api, FeedResult } from "../../services/api"
 
-const FULL: ViewStyle = { flex: 1 }
+const FULL: ViewStyle = { flex: 1, backgroundColor: '#eee' }
 export interface WelcomeScreenProps {
   navigation: NativeStackNavigationProp<ParamListBase>
 }

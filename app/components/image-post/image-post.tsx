@@ -14,22 +14,29 @@ export interface ImagePostProps { }
  * Component description here for TypeScript tips.
  */
 export const ImagePost: React.FunctionComponent<ImagePostProps> = props => {
-  const { title, author, media, published} = props.data
+  const { title, author, media, published } = props.data
+
+  const email = author.split(" ")
 
   // const { someStore } = useStores()
 
 
   return useObserver(() => (
     <View style={styles.WRAPPER}>
-      <Text>{author}</Text>
+
+      <View style={styles.DETAIL}>
+        <Text style={styles.AUTHOR}>{email[0]}</Text>
+        <Text>{getLocalTime(published)}</Text>
+      </View>
       <Image
         source={{ uri: media.m }}
         style={styles.IMG}
         resizeMode={"contain"}
 
       />
-      <Text>{getLocalTime(published)}</Text>
-      <Text>{title}</Text>
+      <View style={styles.DETAIL}>
+        <Text>{title}</Text>
+      </View>
     </View>
   ))
 }

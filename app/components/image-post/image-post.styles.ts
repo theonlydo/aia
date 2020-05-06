@@ -5,13 +5,32 @@ import { UI } from "../../constants/ui"
 export const imagePostStyles = {
   WRAPPER: {
     justifyContent: 'center',
-    marginBottom: spacing[4]
+    marginBottom: spacing[5],
+    backgroundColor: color.white,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+
+    elevation: 3,
   } as ViewStyle,
 
   IMG: {
-    height: UI.IMG_HEIGHT,
     width: UI.IMG_WIDTH,
+    height: UI.IMG_HEIGHT,
     backgroundColor: color.grey
-  } as ViewStyle
+  } as ViewStyle,
 
+  DETAIL: {
+    marginHorizontal: spacing[4],
+    marginVertical: spacing[3]
+  } as ViewStyle,
+
+
+  AUTHOR: {
+    fontWeight: 'bold',
+  } as ViewStyle
 }
