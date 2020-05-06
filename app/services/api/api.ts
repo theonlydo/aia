@@ -2,6 +2,7 @@ import { ApisauceInstance, create, ApiResponse } from "apisauce"
 import { getGeneralApiProblem } from "./api-problem"
 import { ApiConfig, DEFAULT_API_CONFIG } from "./api-config"
 import * as Types from "./api.types"
+import { GET } from "../../constants/urls"
 
 /**
  * Manages all requests to the API.
@@ -43,43 +44,20 @@ export class Api {
       },
     })
   }
+  
 
   /**
-   * Gets a list of users.
-   */
-  async getUsers(): Promise<Types.GetUsersResult> {
-    // make the api call
-    const response: ApiResponse<any> = await this.apisauce.get(`/users`)
-
-    // the typical ways to die when calling an api
-    if (!response.ok) {
-      const problem = getGeneralApiProblem(response)
-      if (problem) return problem
-    }
-
-    const convertUser = raw => {
-      return {
-        id: raw.id,
-        name: raw.name,
-      }
-    }
-
-    // transform the data into the format we are expecting
-    try {
-      const rawUsers = response.data
-      const resultUsers: Types.User[] = rawUsers.map(convertUser)
-      return { kind: "ok", users: resultUsers }
-    } catch {
-      return { kind: "bad-data" }
-    }
-  }
-
-  /**
-   * Gets a list of users.
+   * Get feed list
    */
   async getFeed(tag = null): Promise<Types.GetUsersResult> {
     // make the api call
-    const response: ApiResponse<any> = await this.apisauce.get(`/services/feeds/photos_public.gne`)
+    var data = {
+      tag: tag,
+      format: 'json'
+    }
+
+    const response: ApiResponse<any> = await this.apisauce.get(GET.FEED, data)
+    console.log(response.data)
 
     // the typical ways to die when calling an api
     if (!response.ok) {
@@ -87,18 +65,11 @@ export class Api {
       if (problem) return problem
     }
 
-    const convertUser = raw => {
-      return {
-        id: raw.id,
-        name: raw.name,
-      }
-    }
 
     // transform the data into the format we are expecting
     try {
       const rawUsers = response.data
-      const resultUsers: Types.User[] = rawUsers.map(convertUser)
-      return { kind: "ok", users: resultUsers }
+      return { kind: "ok", users: rawUsers }
     } catch {
       return { kind: "bad-data" }
     }

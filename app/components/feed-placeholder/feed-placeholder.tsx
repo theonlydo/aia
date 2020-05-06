@@ -1,6 +1,6 @@
 import * as React from "react"
 import { View, ViewStyle } from "react-native"
-import { Text } from "../"
+import { Text, Screen } from "../"
 import { feedPlaceholderStyles as styles } from "./feed-placeholder.styles"
 import {
   Placeholder,
@@ -39,7 +39,17 @@ export function FeedPlaceholder(props: FeedPlaceholderProps) {
   return (
     <View style={styles.WRAPPER} {...rest}>
 
+      <View style={styles.INFO}>
+        <Placeholder
+          Animation={Fade}
+          Left={PlaceholderMedia}
+        >
+          <PlaceholderLine width={80} />
+          <PlaceholderLine />
+        </Placeholder>
+      </View>
       <PlaceholderMedia style={styles.IMG} />
+
 
       <View style={styles.INFO}>
         <Placeholder
@@ -50,30 +60,9 @@ export function FeedPlaceholder(props: FeedPlaceholderProps) {
           <PlaceholderLine />
         </Placeholder>
       </View>
-
       <PlaceholderMedia style={styles.IMG} />
 
-      <View style={styles.INFO}>
-        <Placeholder
-          Animation={Fade}
-          Left={PlaceholderMedia}
-        >
-          <PlaceholderLine width={80} />
-          <PlaceholderLine />
-        </Placeholder>
-      </View>
 
-      <PlaceholderMedia style={styles.IMG} />
-
-      <View style={styles.INFO}>
-        <Placeholder
-          Animation={Fade}
-          Left={PlaceholderMedia}
-        >
-          <PlaceholderLine width={80} />
-          <PlaceholderLine />
-        </Placeholder>
-      </View>
     </View>
   )
 }

@@ -1,10 +1,12 @@
 import * as React from "react"
-import { View, Image, ViewStyle, TextStyle, ImageStyle, SafeAreaView } from "react-native"
+import { View, ViewStyle } from "react-native"
 import { ParamListBase } from "@react-navigation/native"
 import { NativeStackNavigationProp } from "react-native-screens/native-stack"
-import { Button, Screen, FeedPlaceholder } from "../../components"
+import { Screen, FeedPlaceholder } from "../../components"
 import { color, spacing } from "../../theme"
 import { ImagePost } from "../../components/image-post/image-post"
+import { SearchBar } from 'react-native-elements';
+import { Api } from "../../services/api"
 
 const FULL: ViewStyle = { flex: 1 }
 const CONTAINER: ViewStyle = {
@@ -18,21 +20,43 @@ export interface WelcomeScreenProps {
 
 export const WelcomeScreen: React.FunctionComponent<WelcomeScreenProps> = props => {
 
-  const [loading, setLoading] = React.useState(true);
+  const [loading, setLoading] = React.useState(true)
+  const [data, setData] = React.useState([])
+  const [tag, setTag] = React.useState(null)
 
-  //if(loading){ return <FeedPlaceholder/> }
-  return (
-      <Screen style={CONTAINER} preset="scroll" backgroundColor={color.background}>
-        <FeedPlaceholder />
-      </Screen>
-  )
+  const api = new Api()
+
+
+  React.useEffect(() => {
+    console.log("ulang")
+    api.setup()
+    getData()
+  });
+
+  async function getData(){
+    setLoading(true)
+    const res = api.getFeed(tag)
+    console.log(JSON.stringify(res))
+    setLoading(false)
+  }
+
+  function renderList() {
+    return <ImagePost />
+  }
 
   return (
-    <View testID="WelcomeScreen" style={FULL}>
+    <View style={FULL}>
+      <SearchBar
+        placeholder="Search tag image here"
+        onChangeText={(t) => setTag(t)}
+        value={tag}
+        lightTheme style={{marginBottom:spacing[4]}}/>
       <Screen style={CONTAINER} preset="scroll" backgroundColor={color.background}>
-        <ImagePost/>
+
+        {loading ? <FeedPlaceholder /> : renderList()}
+
       </Screen>
-    
+
     </View>
   )
 }

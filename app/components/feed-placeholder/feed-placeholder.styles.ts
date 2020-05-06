@@ -14,6 +14,6 @@ export const feedPlaceholderStyles = {
   INFO: {
     backgroundColor: color.white,
     marginVertical: spacing[3],
-    marginHorizontal: spacing[4]
+    marginHorizontal: spacing[3]
   } as ViewStyle,
 }
